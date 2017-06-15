@@ -1,0 +1,30 @@
+/*
+Stylesheet for Hazen Breen My Old Kentucky Home
+
+by: Hazen Breen
+*/
+
+
+body, h1, h2, h3, h4 {
+    font-family:'Times New Roman';
+}
+
+h1 {
+    text-align: center;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+
+}
+
+#lyrics {
+    position: relative;
+    text-align: center;
+}
+
+
