@@ -9,7 +9,7 @@ Everything in this assignment is implemented correctly.
 
 
 Collaboration:
-On this assignmnet I collaborated with Jordan Stone, specifically on configuring the API.
+On this assignmnet I collaborated with Jordan Stone, specifically on configuring the API and creating the proper sized logo.
 
 Time:
 I spent approximately 3 hours on this assignment.
