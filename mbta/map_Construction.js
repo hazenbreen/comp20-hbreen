@@ -22,6 +22,13 @@ var map;
 var marker;
 var infowindow = new google.maps.InfoWindow();
 
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = parseJSONData;
+var object;
+xhttp.open("GET", "https://defense-in-derpth.herokuapp.com/redline.json", true);
+xhttp.send();
+
+
 
 
 /////////create stations///////////////
@@ -62,7 +69,7 @@ function init()
     navigator.geolocation.getCurrentPosition(createMyMarker);
     createMarkers();
     createPolyline();
-    parse();
+    parseJSONData();
 }
 
 
@@ -133,132 +140,242 @@ function createMarkers()
         map: map,
         icon: 'T_logo.png'
     });
+    var SSInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerSouthStation, 'click', function() {
+        SSInfowindow.setContent(getSchedule("South Station"));
+        SSInfowindow.open(map, markerSouthStation);
+    })
 
     markerAndrew = new google.maps.Marker({
         position: andrew,
         map: map,
         icon: 'T_logo.png'
     });
+    var andrewInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerAndrew, 'click', function() {
+        andrewInfowindow.setContent(getSchedule("Andrew"));
+        andrewInfowindow.open(map, markerAndrew);
+    })
 
     markerPorterSquare = new google.maps.Marker({
         position: porterSquare,
         map: map,
         icon: 'T_logo.png'
     });
+    var PSInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerPorterSquare, 'click', function() {
+        PSInfowindow.setContent(getSchedule("Porter Square"));
+        PSInfowindow.open(map, markerPorterSquare);
+    })
 
     markerHarvardSquare = new google.maps.Marker({
         position: harvardSquare,
         map: map,
         icon: 'T_logo.png'
     });
+    var HSInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerHarvardSquare, 'click', function() {
+        HSInfowindow.setContent(getSchedule("Harvard Square"));
+        HSInfowindow.open(map, markerHarvardSquare);
+    })
 
     markerJFK = new google.maps.Marker({
         position: JFK,
         map: map,
         icon: 'T_logo.png'
     });
+    var JFKInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerJFK, 'click', function() {
+        JFKInfowindow.setContent(getSchedule("JFK/UMass"));
+        JFKInfowindow.open(map, markerJFK);
+    })
 
     markerSavinHill = new google.maps.Marker({
         position: savinHill,
         map: map,
         icon: 'T_logo.png'
     });
+    var SHInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerSavinHill, 'click', function() {
+        SHInfowindow.setContent(getSchedule("Savin Hill"));
+        SHInfowindow.open(map, markerSavinHill);
+    })
 
     markerParkStreet = new google.maps.Marker({
         position: parkStreet,
         map: map,
         icon: 'T_logo.png'
     });
+    var ParkSInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerParkStreet, 'click', function() {
+        ParkSInfowindow.setContent(getSchedule("Park Street"));
+        ParkSInfowindow.open(map, markerParkStreet);
+    })
 
     markerBroadway = new google.maps.Marker({
         position: broadway ,
         map: map,
         icon: 'T_logo.png'
     });
+    var BInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerBroadway, 'click', function() {
+        BInfowindow.setContent(getSchedule("Broadway"));
+        BInfowindow.open(map, markerBroadway);
+    })
 
     markerNorthQuincy = new google.maps.Marker({
         position: northQuincy,
         map: map,
         icon: 'T_logo.png'
     });
+    var NQInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerNorthQuincy, 'click', function() {
+        NQInfowindow.setContent(getSchedule("North Quincy"));
+        NQInfowindow.open(map, markerNorthQuincy);
+    })
 
     markerShawmut = new google.maps.Marker({
         position: shawmut,
         map: map,
         icon: 'T_logo.png'
     });
+    var ShawmutInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerShawmut, 'click', function() {
+        ShawmutInfowindow.setContent(getSchedule("Shawmut"));
+        ShawmutInfowindow.open(map, markerShawmut);
+    })
 
     markerDavis = new google.maps.Marker({
         position: davis,
         map: map,
         icon: 'T_logo.png'
     });
+    var DavisInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerDavis, 'click', function() {
+        DavisInfowindow.setContent(getSchedule("Davis"));
+        DavisInfowindow.open(map, markerDavis);
+    })
 
     markerAlewife = new google.maps.Marker({
         position: alewife,
         map: map,
         icon: 'T_logo.png'
     });
+    var AlewifeInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerAlewife, 'click', function() {
+        AlewifeInfowindow.setContent(getSchedule("Alewife"));
+        AlewifeInfowindow.open(map, markerAlewife);
+    })
 
     markerKendalLMIT = new google.maps.Marker({
         position: kendallMIT,
         map: map,
         icon: 'T_logo.png'
     });
+    var KMInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerKendalLMIT, 'click', function() {
+        KMInfowindow.setContent(getSchedule("Kendall/MIT"));
+        KMInfowindow.open(map, markerKendalLMIT);
+    })
 
     markerCharlesMGH= new google.maps.Marker({
         position: charlesMGH,
         map: map,
         icon: 'T_logo.png'
     });
+    var CMGHInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerCharlesMGH, 'click', function() {
+        CMGHInfowindow.setContent(getSchedule("Charles/MGH"));
+        CMGHInfowindow.open(map, markerCharlesMGH);
+    })
 
     markerDowntownCrossing = new google.maps.Marker({
         position: downtownCrossing,
         map: map,
         icon: 'T_logo.png'
     });
+    var DCInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerDowntownCrossing, 'click', function() {
+        DCInfowindow.setContent(getSchedule("Downtown Crossing"));
+        DCInfowindow.open(map, markerDowntownCrossing);
+    })
 
     markerQuincyCenter = new google.maps.Marker({
         position: quincyCenter,
         map: map,
         icon: 'T_logo.png'
     });
+    var QCInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerQuincyCenter, 'click', function() {
+        QCInfowindow.setContent(getSchedule("Quincy Center"));
+        QCInfowindow.open(map, markerQuincyCenter);
+    })
 
     markerQuincyAdams = new google.maps.Marker({
         position: quincyAdams,
         map: map,
         icon: 'T_logo.png'
     });
+    var QAInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerQuincyAdams, 'click', function() {
+        QAInfowindow.setContent(getSchedule("Quincy Adams"));
+        QAInfowindow.open(map, markerQuincyAdams);
+    })
 
     markerAshmont = new google.maps.Marker({
         position: ashmont,
         map: map,
         icon: 'T_logo.png'
     });
+    var AshInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerAshmont, 'click', function() {
+        AshInfowindow.setContent(getSchedule("Ashmont"));
+        AshInfowindow.open(map, markerAshmont);
+    })
 
     markerWollaston = new google.maps.Marker({
         position: wollaston,
         map: map,
         icon: 'T_logo.png'
     });
+    var WollInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerWollaston, 'click', function() {
+        WollInfowindow.setContent(getSchedule("Wollaston"));
+        WollInfowindow.open(map, markerWollaston);
+    })
 
     markerFieldsCorner = new google.maps.Marker({
         position: fieldsCorner,
         map: map,
         icon: 'T_logo.png'
     });
+    var FCInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerFieldsCorner, 'click', function() {
+        FCInfowindow.setContent(getSchedule("Fields Corner"));
+        FCInfowindow.open(map, markerFieldsCorner);
+    })
 
     markerCentralSquare = new google.maps.Marker({
         position: centralSquare,
         map: map,
         icon: 'T_logo.png'
     });
+    var CSInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerCentralSquare, 'click', function() {
+        CSInfowindow.setContent(getSchedule("Central Square"));
+        CSInfowindow.open(map, markerCentralSquare);
+    })
 
     markerBraintree = new google.maps.Marker({
         position: braintree,
         map: map,
         icon: 'T_logo.png'
     });
+    var BtInfowindow = new google.maps.InfoWindow();
+    google.maps.event.addListener(markerBraintree, 'click', function() {
+        BtInfowindow.setContent(getSchedule("Braintree"));
+        BtInfowindow.open(map, markerBraintree);
+    })
 }
 
 
@@ -329,30 +446,28 @@ function createPolyline () {
 
 
 
-
-
 function getSchedule(name) {
-    for (var i = 0; i < data.TripList.Trips.length; i++) {
-        for (var j = 0; j < data.TripList.Trips[i].Predictions.length; j++) {
-            if (name == data.TripList.Trips[i].Predictions[j].Stop) {
-                
+
+    var schedule = "Train Schedule: <br/>";
+
+    for (var i = 0; i < object.TripList.Trips.length; i++) {
+        for (var j = 0; j < object.TripList.Trips[i].Predictions.length; j++) {
+            if (name == object.TripList.Trips[i].Predictions[j].Stop) {
+                schedule += object.TripList.Trips[i].Destination + " - " + 
+                    ((object.TripList.Trips[i].Predictions[j].Seconds)/60).toFixed(2) + " mins" + "<br/>";
             }            
         }
     }
+    return schedule;
 }
 
 
 
 
-
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = parse;
-
-function parse() {
+function parseJSONData() {
     if (xhttp.readyState == 4 && xhttp.status == 200) {
-       var object = JSON.parse(xhttp.responseText);
+       object = JSON.parse(xhttp.responseText);
     }
 }
 
-xhttp.open("GET", "https://defense-in-derpth.herokuapp.com/redline.json", true);
-xhttp.send();
+
