@@ -448,13 +448,38 @@ function createPolyline () {
 
 function getSchedule(name) {
 
-    var schedule = "Train Schedule: <br/>";
+    var schedule = "Train Schedule <br/>Destination: Time to Arrival in Station<br /><br />";
+    var minutesToArrival;
+    var secondsToArrival;
+    var stringSecondsToArrival;
 
     for (var i = 0; i < object.TripList.Trips.length; i++) {
         for (var j = 0; j < object.TripList.Trips[i].Predictions.length; j++) {
             if (name == object.TripList.Trips[i].Predictions[j].Stop) {
-                schedule += object.TripList.Trips[i].Destination + " - " + 
-                    ((object.TripList.Trips[i].Predictions[j].Seconds)/60).toFixed(2) + " mins" + "<br/>";
+
+                minutesToArrival = 0;
+                secondsToArrival = (object.TripList.Trips[i].Predictions[j].Seconds)
+
+                //convert from seconds to minutes and seconds
+                while (secondsToArrival > 60) {
+                    minutesToArrival += 1;
+                    secondsToArrival -= 60;
+                }
+
+                if (secondsToArrival < 0) { // if train just left
+                    secondsToArrival = Math.abs(secondsToArrival);
+                    stringSecondsToArrival = secondsToArrival.toString();
+                    schedule += object.TripList.Trips[i].Destination + ": -" + minutesToArrival + 
+                        ":" + stringSecondsToArrival + "<br/>";
+                } else if (secondsToArrival < 10) { //if number of seconds is less than 10 prepend 0
+                    stringSecondsToArrival = "0" + secondsToArrival.toString();
+                    schedule += object.TripList.Trips[i].Destination + ": " + minutesToArrival + 
+                        ":" + stringSecondsToArrival + "<br/>";
+                } else { //print normal
+                    stringSecondsToArrival = secondsToArrival.toString();
+                    schedule += object.TripList.Trips[i].Destination + ": " + minutesToArrival + 
+                        ":" + stringSecondsToArrival + "<br/>";
+                }
             }            
         }
     }
