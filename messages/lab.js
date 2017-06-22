@@ -25,5 +25,5 @@ function parse() {
 
 
 
-xhttp.open("GET", "data.json", true);
+xhttp.open("GET", "https://messagehub.herokuapp.com/messages.json", true);
 xhttp.send();

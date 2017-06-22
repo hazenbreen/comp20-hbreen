@@ -1,6 +1,6 @@
 # hazenbreen.github.io
-COMP 20 Lab 8
-Closest MBTA Station - Part 1
+COMP 20 Lab 10
+Closest MBTA Station - Part 2
 by Hazen Breen
 
 
@@ -9,7 +9,7 @@ Everything in this assignment is implemented correctly.
 
 
 Collaboration:
-On this assignmnet I collaborated with Jordan Stone, specifically on configuring the API and creating the proper sized logo.
+On this assignmnet I collaborated with Jordan Stone, specifically on using the API for train locations.
 
 Time:
-I spent approximately 3 hours on this assignment.
+I spent approximately 6 hours on this assignment.
