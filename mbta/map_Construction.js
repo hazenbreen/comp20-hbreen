@@ -331,26 +331,28 @@ function createPolyline () {
 
 
 
-
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = parse();
-
-    http.get("https://defense-in-derpth.herokuapp.com/redline.json", parse);
-
-
-function parse() {
-    if (this.readyState == 4 && this.status == 200) {
-        console.log(1);
-
-       var object = JSON.parse(this.responseText);
-
-
-
-
+function getSchedule(name) {
+    for (var i = 0; i < data.TripList.Trips.length; i++) {
+        for (var j = 0; j < data.TripList.Trips[i].Predictions.length; j++) {
+            if (name == data.TripList.Trips[i].Predictions[j].Stop) {
+                
+            }            
+        }
     }
 }
 
 
+
+
+
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = parse;
+
+function parse() {
+    if (xhttp.readyState == 4 && xhttp.status == 200) {
+       var object = JSON.parse(xhttp.responseText);
+    }
+}
 
 xhttp.open("GET", "https://defense-in-derpth.herokuapp.com/redline.json", true);
 xhttp.send();

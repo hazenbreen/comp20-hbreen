@@ -4,10 +4,15 @@ Messages - Part 2
 by Hazen Breen
 
 Part 2:
-The page loads, but the messages are not displayed, since the data.json file is not on the same server.
-Therefore, the XMLHttpRequest cannot load data.json because it would be a cross origin request.
+The page and heading "Messages" loads, but the messages are not displayed, since the data.json file is not on the same server.
+Therefore, the XMLHttpRequest cannot load data.json because it would be a cross origin request. An error describing this
+is displayed on the console.
 
 Part 3:
+The page and heading "Messages" loads, but the messages are not displayed. No errors are displayed on the console.
+
+Summary:
+Both part 2 and part 3 show that it is not possible to request data from a different origin.
 
 
 Implementation:
