@@ -1,1 +1,24 @@
-/* Your CSS here... */
+/*
+*   Comp 20: Messages Part 2
+*
+*   CSS file
+*
+*   Hazen Breen
+*/
+
+
+body, h1, h2, h3, h4 {
+    font-family:'Roboto';
+}
+
+h1 {
+    text-align: center;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#messages {
+    position: relative;
+    text-align: center;
+    background-color: rgb(144,238,144);
+}

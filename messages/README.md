@@ -1,6 +1,6 @@
 # hazenbreen.github.io
-COMP 20 Lab 7
-Messages - Part 1
+COMP 20 Lab 9
+Messages - Part 2
 by Hazen Breen
 
 
@@ -9,7 +9,7 @@ Everything in this assignment is implemented correctly.
 
 
 Collaboration:
-On this assignmnet I collaborated with Jordan Stone, specifically on parsing the JSON string.
+On this assignmnet I collaborated with Jordan Stone, specifically in figuring out the basics of XMLHttpRequest.
 
 Time:
-I spent approximately 1 hours on this assignment.
+I spent approximately 2 hours on this assignment.
