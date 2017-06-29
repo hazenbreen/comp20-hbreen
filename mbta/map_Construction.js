@@ -25,7 +25,7 @@ var infowindow = new google.maps.InfoWindow();
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = parseJSONData;
 var object;
-xhttp.open("GET", "https://defense-in-derpth.herokuapp.com/redline.json", true);
+xhttp.open("GET", "https://guarded-ravine-54398.herokuapp.com/redline.json", true);
 xhttp.send();
 
 
@@ -76,12 +76,12 @@ function init()
 
 function findMyClosestStation()
 {
-    var closestDistance = google.maps.geometry.spherical.computeDistanceBetween(myLocation, southStation);
+    var closestDistance = 0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(myLocation, southStation);
     var currentDistance = 0;
     var closestStationNumber = 0;
 
     for (i = 0; i < 22; i++) {
-        currentDistance = google.maps.geometry.spherical.computeDistanceBetween(myLocation, allStations[i]);
+        currentDistance = 0.000621371192 * google.maps.geometry.spherical.computeDistanceBetween(myLocation, allStations[i]);
         if (currentDistance < closestDistance){
             closestDistance = currentDistance;
             closestStationNumber = i;
@@ -89,7 +89,7 @@ function findMyClosestStation()
     }
 
     infowindow.setContent(marker.title + "<br />Closest Redline Station:  " + allStationNames[closestStationNumber] + 
-                            "<br />Distance from you:  " + Math.round(closestDistance) + " meters");
+                            "<br />Distance from you:  " + closestDistance.toFixed(2) + " miles");
     infowindow.open(map, marker);
 
     //create polyline
