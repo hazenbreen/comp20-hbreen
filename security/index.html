@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Security Report for "Not Foursquare"</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+
+    <body>
+        <h1> Security Report for "Not Foursquare"</h1>
+        <p id = "author_info"> Written by Hazen Breen </p id = "author_info">
+        <h2>Introduction</h2>
+        <p> Herein lies the Security Report of the Not Foursquare website.  This website was created to serve as a testing environment for the security assessment abilities of the students of COMP 20 at Tufts University.  The objective of this report is to describe the various security risks present in the Not Foursquare website.  Using curl and extensive knowledge of Web Development, several serious risk factors have been identified.  These risks are described within, along with recommendations on making the website secure in these specific problem areas. </p>
+
+        <h2>Methodology</h2>
+        <p>The central tool used to conduct this report was cURL, a command line tool to transfer data.  Data was sent to Not Foursquare in various forms searching for vulnerabilities in the website.  Several vulnerabilities were found that can be exploited using injections of data into the web application.</p>
+
+        <h2>Abstract of Finding</h2>
+        <p> Several security vulnerabilities were discovered on the Not Foursquare website.  These include HTML insertion, XSS, and Cross-Origin Resource Sharing vulnerabilities.  These security holes are a result of an excess of trust in client input.  Client input is not screened, checked, or cleaned in any way, a fact which results in the website being modifiable by a potentially malicious client.  These holes could result in the Not Foursquare website being changed in appearance or functionality.  Currently, the website is too insecure to be on the web.  By introducing some simple changes, the most glaring of these vulnerabilities can be patched. </p>
+
+
+        <h2>Issues Found</h2>
+        <ol>
+            <li>
+                <h3>HTML Injection Vulnerability</h3>
+                <ul>
+                    <li><strong>Location:</strong> This problem lies in the login capabilities of the Not Foursquare web application.  The login capability is present to users through the use of cURL. The vulnerability is specifically at https://defense-in-derpth.herokuapp.com/sendLocation.</li>
+                    <li><strong>Description:</strong> Using cURL, I found this problem by attempting to access the login functionality of the web application.  In order to log in, the website takes a string for the username and a latitude and longitude.  The problem lies in the fact that the string for username is not sanitized in any way, allowing an attacker to input  HTML that can access and change parameters of the site. Below is an example of a normal client's login information, followed by a malicious client's login information that would breach the Not Foursquare security.<br /><img src="normal_login.png"><img src="HTML_injection_login.png"></li>
+
+                    <li><strong>Proof:</strong> In the below screenshot, we can see that the website has been modified to display the string input that was inputted as a login username.<br /><img src="HTML_injection_proof.png"></li>
+                    <li><strong>Severity: High</strong> - This vulnerability opens the door for a malicious user to significantly alter the appearance and even the functionality of the Not Foursquare website.  It would be possible to use this vulnerability to send personal data belonging to an innocent user to a hacker.</li>
+                    <li><strong>Solution:</strong> The solution to this problem is to clean the login string as it is input into the website.  Characters that are associated with this method of attack can be removed from any input string to prevent this attack.  This can be done with the following code<xmp>login = login.replace(/</g, "&lt;").replace(/>/g, "&gt;");</xmp>which will make any tags into their HTML equivalent and thus, unable to create an HTML element.</li>
+
+                </ul>
+            </li>
+            <li>
+                <h3>XSS Vulnerability</h3>
+                <ul>
+                    <li><strong>Location:</strong> This problem lies in the login capabilities of the Not Foursquare web application.  The login capability is present to users through the use of cURL. The vulnerability is specifically at https://defense-in-derpth.herokuapp.com/sendLocation.</li>
+                    <li><strong>Description:</strong> Using cURL, I found this problem by attempting to access the login functionality of the web application.  In order to log in, the website takes a string for the username and a latitude and longitude.  The problem lies in the fact that the string for username is not sanitized in any way, allowing an attacker to input a script that can access and change parameters of the site, which can be incredibly dangerous because from this access point a malicious client could access other user’s data. Below is an example of a normal client's login information, followed by a malicious client's login information that would breach the Not Foursquare security.<br /><img src="normal_login.png"><img src="XSS_login.png"></li>
+                    <li><strong>Proof:</strong> In the below screenshot, we can see that the website has been modified to create a pop-up alert as specified by the script inputted as the login name.<br /><img src="XSS_proof.png"></li>
+                    <li><strong>Severity: High</strong> - This vulnerability opens the door for a malicious user to significantly alter the functionality of the Not Foursquare website.  It would be possible to use this vulnerability to send personal data belonging to an innocent user to a hacker.  A malicious user has so much control once they breach this website that any data related to the site is vulnerable.</li>
+                    <li><strong>Solution:</strong> The solution to this problem is the same as the solution to the HTML Insertion vulnerability. The solution is to clean the login string as it is input into the website.  Characters that are associated with this method of attack can be removed from any input string to prevent this attack.  This can be done with the following code<xmp>login = login.replace(/</g, "&lt;").replace(/>/g, "&gt;");</xmp>which will make any tags into their HTML equivalent and thus, unable to create an HTML element.</li>
+
+                </ul>
+            </li>
+            <li>
+                <h3>Cross-Origin Resource Sharing Vulnerability</h3>
+                <ul>
+                    <li><strong>Location:</strong> </li>
+                    <li><strong>Description:</strong> </li>
+                    <li><strong>Proof:</strong> </li>
+                    <li><strong>Severity: High</strong> - </li>
+                    <li><strong>Solution:</strong> </li>
+
+                </ul>
+            </li>
+        </ol>
+        <h2>Conclusion</h2>
+    </body>
+</html>
